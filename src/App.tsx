@@ -378,7 +378,7 @@ function App() {
             transition={{ delay: 0.7, duration: 0.8, ease: "easeOut" }}
             className="text-6xl font-bold bg-gradient-to-r from-[#FAF0E6] to-[#B9B4C7] text-transparent bg-clip-text tracking-wider"
           >
-            Cgmu
+            Cogmu
           </motion.h1>
           
           <motion.div
