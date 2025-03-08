@@ -290,18 +290,85 @@ function App() {
       >
         <motion.div
           animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 360],
+            scale: [1, 1.05, 1],
           }}
           transition={{
             duration: 2,
             ease: "easeInOut",
             times: [0, 0.5, 1],
-            repeat: 1,
+            repeat: Infinity,
           }}
-          className="animate-glow rounded-full p-8 glass-morphism mb-6 mx-auto w-40 h-40 flex items-center justify-center"
+          className="mb-8 mx-auto w-64 h-64 flex items-center justify-center relative"
         >
-          <Music2 className="w-24 h-24 text-[#FAF0E6] drop-shadow-lg" />
+          {/* Animated background glow */}
+          <motion.div
+            className="absolute inset-0 rounded-full"
+            animate={{
+              boxShadow: [
+                "0 0 20px rgba(250, 240, 230, 0.3)",
+                "0 0 40px rgba(250, 240, 230, 0.5)",
+                "0 0 20px rgba(250, 240, 230, 0.3)"
+              ]
+            }}
+            transition={{
+              duration: 3,
+              ease: "easeInOut",
+              repeat: Infinity,
+            }}
+          />
+          
+          {/* Outer circle with gradient */}
+          <motion.div 
+            className="absolute inset-0 rounded-full"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            style={{
+              background: "linear-gradient(135deg, rgba(185, 180, 199, 0.3), rgba(250, 240, 230, 0.4))",
+              border: "2px solid rgba(250, 240, 230, 0.6)",
+              boxShadow: "inset 0 0 20px rgba(250, 240, 230, 0.2)"
+            }}
+          />
+          
+          {/* Custom sound wave SVG that matches the image */}
+          <motion.svg 
+            viewBox="0 0 100 100" 
+            className="w-56 h-56 relative z-10"
+          >
+            {/* Multiple wave paths with different animations */}
+            {[...Array(8)].map((_, i) => {
+              const offset = i * 2;
+              const delayFactor = 0.1;
+              const opacityBase = 0.4 + (i / 14); // Gradually increases opacity
+              
+              return (
+                <motion.path
+                  key={i}
+                  d={`M15,50 C30,${35 - offset} 45,${65 + offset} 50,50 C55,${35 - offset} 70,${65 + offset} 85,50`}
+                  fill="none"
+                  stroke="rgba(250, 240, 230, 0.95)"
+                  strokeWidth={1.2 - (i * 0.05)}
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ 
+                    pathLength: 1, 
+                    opacity: opacityBase,
+                    y: [offset/2, -offset/2, offset/2]
+                  }}
+                  transition={{ 
+                    pathLength: { delay: i * delayFactor, duration: 1.5, ease: "easeOut" },
+                    opacity: { delay: i * delayFactor, duration: 1 },
+                    y: { 
+                      delay: i * delayFactor, 
+                      duration: 3 + (i * 0.2), 
+                      repeat: Infinity,
+                      ease: "easeInOut" 
+                    }
+                  }}
+                />
+              );
+            })}
+          </motion.svg>
         </motion.div>
         
         <motion.div className="relative">
@@ -309,7 +376,7 @@ function App() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8, ease: "easeOut" }}
-            className="text-5xl font-bold mt-6 bg-gradient-to-r from-[#FAF0E6] to-[#B9B4C7] text-transparent bg-clip-text tracking-wider"
+            className="text-6xl font-bold bg-gradient-to-r from-[#FAF0E6] to-[#B9B4C7] text-transparent bg-clip-text tracking-wider"
           >
             Cogmu
           </motion.h1>
@@ -324,7 +391,7 @@ function App() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.8 }}
-            transition={{ delay: 0.125, duration: 0.8 }}
+            transition={{ delay: 1.4, duration: 0.8 }}
             className="text-[#FAF0E6] mt-3 text-lg"
           >
             Your musical journey awaits
