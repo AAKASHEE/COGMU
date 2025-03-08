@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background: linear-gradient(135deg, #352F44 0%, #5C5470 50%, #B9B4C7 85%, #FAF0E6 100%);
+    color: #FAF0E6;
+  }
+}
+
+@layer components {
+  .glass-morphism {
+    @apply bg-[#5C5470]/10 backdrop-blur-lg border border-[#B9B4C7]/20;
+  }
+  
+  .button-primary {
+    @apply px-4 py-2 bg-gradient-to-r from-[#5C5470] to-[#352F44] hover:from-[#352F44] hover:to-[#5C5470] text-[#FAF0E6] rounded-lg transition-all duration-300 ease-in-out shadow-lg shadow-[#352F44]/50;
+  }
+  
+  .button-secondary {
+    @apply px-4 py-2 bg-[#5C5470]/20 hover:bg-[#5C5470]/30 text-[#FAF0E6] rounded-lg transition-all duration-300 ease-in-out border border-[#B9B4C7]/20;
+  }
+  
+  .card {
+    @apply bg-gradient-to-br from-[#5C5470]/20 to-[#352F44]/20 backdrop-blur-lg rounded-2xl border border-[#B9B4C7]/10 shadow-xl shadow-[#352F44]/20;
+  }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px #B9B4C7, 0 0 20px #5C5470, 0 0 30px #352F44;
+  }
+  to {
+    box-shadow: 0 0 20px #B9B4C7, 0 0 30px #5C5470, 0 0 40px #352F44;
+  }
+}
