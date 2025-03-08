@@ -378,7 +378,7 @@ function App() {
             transition={{ delay: 0.7, duration: 0.8, ease: "easeOut" }}
             className="text-6xl font-bold bg-gradient-to-r from-[#FAF0E6] to-[#B9B4C7] text-transparent bg-clip-text tracking-wider"
           >
-            Cogmu
+            Cgmu
           </motion.h1>
           
           <motion.div
@@ -760,18 +760,50 @@ function App() {
         {isLoading && renderSplashScreen()}
       </AnimatePresence>
       
-      <motion.div 
-        className="min-h-screen text-primary-beige"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8 }}
-      >
-        <div className="container mx-auto px-4 py-8">
-          <header className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-2">
-              <Music2 className="w-8 h-8" />
-              <h1 className="text-3xl font-bold">Cogmu</h1>
-            </div>
+      <motion.div
+  className="min-h-screen text-primary-beige"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 1.8 }}
+>
+  <div className="container mx-auto px-4 py-8">
+    <header className="flex items-center justify-between mb-8">
+      <div className="flex items-center gap-3">
+        {/* Custom sound wave SVG that matches the splash screen logo */}
+        <div className="relative w-10 h-10 flex items-center justify-center">
+          <div 
+            className="absolute inset-0 rounded-full"
+            style={{
+              background: "linear-gradient(135deg, rgba(185, 180, 199, 0.3), rgba(250, 240, 230, 0.4))",
+              border: "1px solid rgba(250, 240, 230, 0.6)",
+              boxShadow: "inset 0 0 10px rgba(250, 240, 230, 0.2)"
+            }}
+          />
+          <svg 
+            viewBox="0 0 100 100" 
+            className="w-8 h-8 relative z-10"
+          >
+            {/* Multiple wave paths */}
+            {[...Array(5)].map((_, i) => {
+              const offset = i * 2;
+              const opacityBase = 0.4 + (i / 14); // Gradually increases opacity
+              
+              return (
+                <path
+                  key={i}
+                  d={`M15,50 C30,${35 - offset} 45,${65 + offset} 50,50 C55,${35 - offset} 70,${65 + offset} 85,50`}
+                  fill="none"
+                  stroke="rgba(250, 240, 230, 0.95)"
+                  strokeWidth={1.2 - (i * 0.05)}
+                  strokeLinecap="round"
+                  opacity={opacityBase}
+                />
+              );
+            })}
+          </svg>
+        </div>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-[#FAF0E6] to-[#B9B4C7] text-transparent bg-clip-text">Cogmu</h1>
+      </div>
             <div className="flex items-center gap-4">
               {user ? (
                 <UserMenu />
